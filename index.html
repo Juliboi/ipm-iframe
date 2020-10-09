@@ -16,7 +16,9 @@
       const button = document.querySelector('.ipm-selector__button');
 
       const handleCommunication = (message) => {
-        console.log(message.data);
+        console.log(
+          `I recieved the message from the top frame: ${message.data}`
+        );
       };
 
       // button.addEventListener('click', handleCommunication);
