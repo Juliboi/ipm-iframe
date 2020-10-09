@@ -12,6 +12,15 @@
       <button class="ipm-selector__button">click me</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      const button = document.querySelector('.ipm-selector__button');
+
+      const handleCommunication = (message) => {
+        console.log(message.data);
+      };
+
+      // button.addEventListener('click', handleCommunication);
+      window.addEventListener('message', handleCommunication);
+    </script>
   </body>
 </html>
