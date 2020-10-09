@@ -15,14 +15,20 @@
     <script>
       const button = document.querySelector('.ipm-selector__button');
 
-      const handleCommunication = (message) => {
+      const recieveMessage = (message) => {
         console.log(
           `I recieved the message from the top frame: ${message.data}`
         );
       };
+      const sendMessage = (document.querySelector(
+        'button'
+      ).onclick = function () {
+        // parent.postMessage("message to be sent", "http://the-website-that-will-receive-the-msg.com")
+        parent.postMessage('myevent', '*');
+      });
 
-      // button.addEventListener('click', handleCommunication);
-      window.addEventListener('message', handleCommunication);
+      button.addEventListener('click', sendMessage);
+      window.addEventListener('message', recieveMessage);
     </script>
   </body>
 </html>

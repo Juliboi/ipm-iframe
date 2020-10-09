@@ -97,4 +97,20 @@
     templateSelectorButton.addEventListener('click', openTemplateSelector);
     window.addEventListener('message', recieveMessage);
   }
+
+  //! recieve message
+  var eventMethod = window.addEventListener
+    ? 'addEventListener'
+    : 'attachEvent';
+  var eventer = window[eventMethod];
+  var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+
+  eventer(messageEvent, function (e) {
+    // if (e.origin !== 'http://the-trusted-iframe-origin.com') return;
+
+    if (e.data === 'myevent' || e.message === 'myevent')
+      alert('Message from iframe just came!');
+
+    console.log(e);
+  });
 })();
