@@ -47,7 +47,7 @@
 
       // Listen to messages from parent window
       bindEvent(window, 'message', function (e) {
-        console.log(`I recieved a message from the top frame ${e.data}`);
+        console.log(`I recieved a message from the top frame: ${e.data}`);
       });
 
       // Send random message data on every button click

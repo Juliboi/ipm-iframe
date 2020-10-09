@@ -126,13 +126,8 @@
     iframeEl.contentWindow.postMessage(msg, '*');
   };
 
-  // Send random messge data on every button click
-  bindEvent(messageButton, 'click', function (e) {
-    sendMessage('A message from the top');
-  });
-
   // Listen to message from child window
   bindEvent(window, 'message', function (e) {
-    console.log(`I recieved a message from the inner frame ${e.data}`);
+    console.log(`I recieved a message from the inner frame: ${e.data}`);
   });
 })();
