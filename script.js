@@ -87,30 +87,52 @@
       templateSelectorIframe.contentWindow.postMessage('bruh...', '*');
     };
 
-    const recieveMessage = () => {
-      console.log(message.log);
-    };
-
     //! event triggers
     modal.addEventListener('click', closeTemplateSelector);
     templateSelectorClose.addEventListener('click', closeTemplateSelector);
     templateSelectorButton.addEventListener('click', openTemplateSelector);
-    window.addEventListener('message', recieveMessage);
   }
 
-  //! recieve message
-  var eventMethod = window.addEventListener
-    ? 'addEventListener'
-    : 'attachEvent';
-  var eventer = window[eventMethod];
-  var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
+  // //! recieve message
+  // var eventMethod = window.addEventListener
+  //   ? 'addEventListener'
+  //   : 'attachEvent';
+  // var eventer = window[eventMethod];
+  // var messageEvent = eventMethod === 'attachEvent' ? 'onmessage' : 'message';
 
-  eventer(messageEvent, function (e) {
-    // if (e.origin !== 'http://the-trusted-iframe-origin.com') return;
+  // eventer(messageEvent, function (e) {
+  //   // if (e.origin !== 'http://the-trusted-iframe-origin.com') return;
 
-    if (e.data === 'myevent' || e.message === 'myevent')
-      alert('Message from iframe just came!');
+  //   if (e.data === 'myevent' || e.message === 'myevent')
+  //     alert('Message from iframe just came!');
 
-    console.log(e);
+  //   console.log(e.message);
+  // });
+  // addEventListener support for IE8
+  function bindEvent(element, eventName, eventHandler) {
+    if (element.addEventListener) {
+      element.addEventListener(eventName, eventHandler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent('on' + eventName, eventHandler);
+    }
+  }
+
+  // Send a message to the child iframe
+  var iframeEl = document.querySelector('.template-selector__button');
+
+  // Send a message to the child iframe
+  var sendMessage = function (msg) {
+    // Make sure you are sending a string, and to stringify JSON
+    iframeEl.contentWindow.postMessage(msg, '*');
+  };
+
+  // Send random messge data on every button click
+  bindEvent(messageButton, 'click', function (e) {
+    sendMessage('A message from the top');
+  });
+
+  // Listen to message from child window
+  bindEvent(window, 'message', function (e) {
+    console.log(`I recieved a message from the inner frame ${e.data}`);
   });
 })();

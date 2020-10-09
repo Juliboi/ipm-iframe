@@ -13,22 +13,47 @@
     </div>
 
     <script>
-      const button = document.querySelector('.ipm-selector__button');
+      // const button = document.querySelector('.ipm-selector__button');
 
-      const recieveMessage = (message) => {
-        console.log(
-          `I recieved the message from the top frame: ${message.data}`
-        );
+      // const recieveMessage = (message) => {
+      //   console.log(
+      //     `I recieved the message from the top frame: ${message.data}`
+      //   );
+      // };
+      // const sendMessage = (document.querySelector(
+      //   'button'
+      // ).onclick = function () {
+      //   // parent.postMessage("message to be sent", "http://the-website-that-will-receive-the-msg.com")
+      //   parent.postMessage('myevent', '*');
+      // });
+
+      // button.addEventListener('click', sendMessage);
+      // window.addEventListener('message', recieveMessage);
+      function bindEvent(element, eventName, eventHandler) {
+        if (element.addEventListener) {
+          element.addEventListener(eventName, eventHandler, false);
+        } else if (element.attachEvent) {
+          element.attachEvent('on' + eventName, eventHandler);
+        }
+      }
+
+      // Send a message to the parent
+      var sendMessage = function (msg) {
+        // Make sure you are sending a string, and to stringify JSON
+        window.parent.postMessage(msg, '*');
       };
-      const sendMessage = (document.querySelector(
-        'button'
-      ).onclick = function () {
-        // parent.postMessage("message to be sent", "http://the-website-that-will-receive-the-msg.com")
-        parent.postMessage('myevent', '*');
+
+      const messageButton = document.querySelector('.ipm-selector__button');
+
+      // Listen to messages from parent window
+      bindEvent(window, 'message', function (e) {
+        console.log(`I recieved a message from the top frame ${e.data}`);
       });
 
-      button.addEventListener('click', sendMessage);
-      window.addEventListener('message', recieveMessage);
+      // Send random message data on every button click
+      bindEvent(messageButton, 'click', function (e) {
+        sendMessage('A message from the bottom');
+      });
     </script>
   </body>
 </html>
