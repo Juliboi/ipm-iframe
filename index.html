@@ -10,9 +10,13 @@
     <div class="ipm-selector">
       <h1 class="ipm-selector__title">IPM Template Selector</h1>
       <button class="ipm-selector__button">Send a message to top frame</button>
+      <div class="ipm-selector__templates"></div>
     </div>
 
+    <script src="constants/templates.js"></script>
     <script>
+      const templates = document.querySelector('.ipm-selector__templates');
+
       const bindEvent = (element, eventName, eventHandler) => {
         if (element.addEventListener) {
           element.addEventListener(eventName, eventHandler, false);
@@ -25,6 +29,25 @@
       const sendMessage = (msg) => {
         window.parent.postMessage(msg, '*');
       };
+
+      TEMPLATE_LIST.forEach((template) => {
+        const templateContainer = document.createElement('div');
+        const templateImage = document.createElement('img');
+
+        templateContainer.classList.add('template');
+        templateImage.classList.add('template__image');
+
+        templateImage.src = template.imgSrc;
+
+        const sendTemplateData = () => {
+          console.log(template.id);
+        };
+
+        templateContainer.addEventListener('click', sendTemplateData);
+
+        templateContainer.appendChild(templateImage);
+        templates.appendChild(templateContainer);
+      });
 
       const messageButton = document.querySelector('.ipm-selector__button');
 

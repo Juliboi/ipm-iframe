@@ -23,3 +23,22 @@ html {
 .ipm-selector__button:hover {
   background-color: #4c84e6;
 }
+
+.ipm-selector__templates {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.template {
+  flex: 1;
+  width: 300px;
+  cursor: pointer;
+  transition: transform 300ms ease-in;
+  display: flex;
+  justify-content: center;
+}
+
+.template:hover {
+  transform: scale(1.1);
+}
