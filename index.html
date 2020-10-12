@@ -40,7 +40,7 @@
         templateImage.src = template.imgSrc;
 
         const sendTemplateData = () => {
-          bindEvent(messageButton, 'click', (e) => {
+          bindEvent(templateImage, 'click', (e) => {
             sendMessage(template.id);
           });
         };
