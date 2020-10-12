@@ -45,7 +45,11 @@
           });
         };
 
-        templateImage.addEventListener('click', sendTemplateData);
+        const yo = () => {
+          sendMessage('yoyoyoy');
+        };
+
+        templateImage.addEventListener('click', yo);
 
         templateContainer.appendChild(templateImage);
         templates.appendChild(templateContainer);
