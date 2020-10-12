@@ -13,33 +13,16 @@
     </div>
 
     <script>
-      // const button = document.querySelector('.ipm-selector__button');
-
-      // const recieveMessage = (message) => {
-      //   console.log(
-      //     `I recieved the message from the top frame: ${message.data}`
-      //   );
-      // };
-      // const sendMessage = (document.querySelector(
-      //   'button'
-      // ).onclick = function () {
-      //   // parent.postMessage("message to be sent", "http://the-website-that-will-receive-the-msg.com")
-      //   parent.postMessage('myevent', '*');
-      // });
-
-      // button.addEventListener('click', sendMessage);
-      // window.addEventListener('message', recieveMessage);
-      function bindEvent(element, eventName, eventHandler) {
+      const bindEvent = (element, eventName, eventHandler) => {
         if (element.addEventListener) {
           element.addEventListener(eventName, eventHandler, false);
         } else if (element.attachEvent) {
-          element.attachEvent('on' + eventName, eventHandler);
+          element.attachEvent(`on${eventName}`, eventHandler);
         }
-      }
+      };
 
       // Send a message to the parent
-      var sendMessage = function (msg) {
-        // Make sure you are sending a string, and to stringify JSON
+      const sendMessage = (msg) => {
         window.parent.postMessage(msg, '*');
       };
 
@@ -50,9 +33,9 @@
       //   console.log(`I recieved a message from the top frame: ${e.data}`);
       // });
 
-      // Send random message data on every button click
-      bindEvent(messageButton, 'click', function (e) {
-        sendMessage('A message from the bottom');
+      // Send a message data on every button click
+      bindEvent(messageButton, 'click', (e) => {
+        sendMessage('Bruh.. A message from the inner frame');
       });
     </script>
   </body>
