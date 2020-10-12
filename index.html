@@ -40,10 +40,12 @@
         templateImage.src = template.imgSrc;
 
         const sendTemplateData = () => {
-          console.log(template.id);
+          bindEvent(messageButton, 'click', (e) => {
+            sendMessage(template.id);
+          });
         };
 
-        templateContainer.addEventListener('click', sendTemplateData);
+        templateImage.addEventListener('click', sendTemplateData);
 
         templateContainer.appendChild(templateImage);
         templates.appendChild(templateContainer);
