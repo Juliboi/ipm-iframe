@@ -39,17 +39,17 @@
 
         templateImage.src = template.imgSrc;
 
+        // const sendTemplateData = () => {
+        //   bindEvent(templateImage, 'click', (e) => {
+        //     sendMessage(template.id);
+        //   });
+        // };
+
         const sendTemplateData = () => {
-          bindEvent(templateImage, 'click', (e) => {
-            sendMessage(template.id);
-          });
+          sendMessage(template.id);
         };
 
-        const yo = () => {
-          sendMessage('yoyoyoy');
-        };
-
-        templateImage.addEventListener('click', yo);
+        templateImage.addEventListener('click', sendTemplateData);
 
         templateContainer.appendChild(templateImage);
         templates.appendChild(templateContainer);
